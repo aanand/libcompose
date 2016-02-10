@@ -1,6 +1,7 @@
 package project
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"sort"
@@ -37,6 +38,18 @@ func toStrings(s []interface{}) ([]string, error) {
 
 // UnmarshalYAML implements the Unmarshaller interface.
 func (s *Stringorslice) UnmarshalYAML(tag string, value interface{}) error {
+	return s.Unmarshal(value)
+}
+
+func (s *Stringorslice) UnmarshalJSON(data []byte) error {
+	var value interface{}
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	return s.Unmarshal(value)
+}
+
+func (s *Stringorslice) Unmarshal(value interface{}) error {
 	switch value := value.(type) {
 	case []interface{}:
 		parts, err := toStrings(value)
@@ -90,6 +103,18 @@ func (u Ulimits) MarshalYAML() (tag string, value interface{}, err error) {
 
 // UnmarshalYAML implements the Unmarshaller interface.
 func (u *Ulimits) UnmarshalYAML(tag string, value interface{}) error {
+	return u.Unmarshal(value)
+}
+
+func (u *Ulimits) UnmarshalJSON(data []byte) error {
+	var value interface{}
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	return u.Unmarshal(value)
+}
+
+func (u *Ulimits) Unmarshal(value interface{}) error {
 	ulimits := make(map[string]Ulimit)
 	yamlUlimits := reflect.ValueOf(value)
 	switch yamlUlimits.Kind() {
@@ -173,6 +198,18 @@ func (s Command) MarshalYAML() (tag string, value interface{}, err error) {
 
 // UnmarshalYAML implements the Unmarshaller interface.
 func (s *Command) UnmarshalYAML(tag string, value interface{}) error {
+	return s.Unmarshal(value)
+}
+
+func (s *Command) UnmarshalJSON(data []byte) error {
+	var value interface{}
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	return s.Unmarshal(value)
+}
+
+func (s *Command) Unmarshal(value interface{}) error {
 	switch value := value.(type) {
 	case []interface{}:
 		parts, err := toStrings(value)
@@ -219,6 +256,18 @@ func (s SliceorMap) MarshalYAML() (tag string, value interface{}, err error) {
 
 // UnmarshalYAML implements the Unmarshaller interface.
 func (s *SliceorMap) UnmarshalYAML(tag string, value interface{}) error {
+	return s.Unmarshal(value)
+}
+
+func (s *SliceorMap) UnmarshalJSON(data []byte) error {
+	var value interface{}
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	return s.Unmarshal(value)
+}
+
+func (s *SliceorMap) Unmarshal(value interface{}) error {
 	switch value := value.(type) {
 	case map[interface{}]interface{}:
 		parts := map[string]string{}
@@ -303,6 +352,18 @@ func toSepMapParts(value map[interface{}]interface{}, sep string) ([]string, err
 
 // UnmarshalYAML implements the Unmarshaller interface.
 func (s *MaporEqualSlice) UnmarshalYAML(tag string, value interface{}) error {
+	return s.Unmarshal(value)
+}
+
+func (s *MaporEqualSlice) UnmarshalJSON(data []byte) error {
+	var value interface{}
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	return s.Unmarshal(value)
+}
+
+func (s *MaporEqualSlice) Unmarshal(value interface{}) error {
 	switch value := value.(type) {
 	case []interface{}:
 		parts, err := toStrings(value)
@@ -345,6 +406,18 @@ func (s MaporColonSlice) MarshalYAML() (tag string, value interface{}, err error
 
 // UnmarshalYAML implements the Unmarshaller interface.
 func (s *MaporColonSlice) UnmarshalYAML(tag string, value interface{}) error {
+	return s.Unmarshal(value)
+}
+
+func (s *MaporColonSlice) UnmarshalJSON(data []byte) error {
+	var value interface{}
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	return s.Unmarshal(value)
+}
+
+func (s *MaporColonSlice) Unmarshal(value interface{}) error {
 	switch value := value.(type) {
 	case []interface{}:
 		parts, err := toStrings(value)
@@ -387,6 +460,18 @@ func (s MaporSpaceSlice) MarshalYAML() (tag string, value interface{}, err error
 
 // UnmarshalYAML implements the Unmarshaller interface.
 func (s *MaporSpaceSlice) UnmarshalYAML(tag string, value interface{}) error {
+	return s.Unmarshal(value)
+}
+
+func (s *MaporSpaceSlice) UnmarshalJSON(data []byte) error {
+	var value interface{}
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	return s.Unmarshal(value)
+}
+
+func (s *MaporSpaceSlice) Unmarshal(value interface{}) error {
 	switch value := value.(type) {
 	case []interface{}:
 		parts, err := toStrings(value)
