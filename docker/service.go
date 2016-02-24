@@ -90,6 +90,10 @@ func (s *Service) createOne(imageName string) (*Container, error) {
 	return containers[0], err
 }
 
+func (s *Service) EnsureImageExists() (string, error) {
+	return s.ensureImageExists()
+}
+
 func (s *Service) ensureImageExists() (string, error) {
 	err := s.imageExists()
 
